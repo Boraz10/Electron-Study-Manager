@@ -6,4 +6,5 @@ console.log("Script loaded.");
 // Push button
 button.addEventListener('click', () => {
     textArea.textContent = "Button Clicked!";
+    textArea.style.color = "blue";
 });
