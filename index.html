@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Test App!</title>
+</head>
+<body>
+    <h1>Hello From Electron</h1>
+    <p>Hi there</p>
+    <button id="bodyButton">Push me!</button>
+    <p id="textArea"></p>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
