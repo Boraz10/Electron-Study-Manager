@@ -1,0 +1,16 @@
+{
+  "name": "electron-study-manager",
+  "version": "1.0.0",
+  "description": "Simple study manager and timer built with electron",
+  "license": "ISC",
+  "author": "Boraz10",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "npm test"
+  },
+  "devDependencies": {
+    "electron": "^40.0.0"
+  }
+}
