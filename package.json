@@ -12,9 +12,12 @@
   },
   "devDependencies": {
     "@types/electron": "^1.4.38",
-    "electron": "^40.0.0"
+    "@types/node": "^25.0.10",
+    "electron": "^40.0.0",
+    "eslint": "^9.39.2"
   },
   "dependencies": {
-    "electron-store": "^11.0.2"
+    "electron-store": "^11.0.2",
+    "typescript": "^5.9.3"
   }
 }
