@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/styles.css">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta
@@ -28,8 +29,15 @@
       <input type="submit" value="Add item to schedule">
     </form>
 
-    <button id="removeButton">Remove last item from schedule</button>
-    <p id="textArea"></p>
+    <div id="binElement">  </div>
+    <ul id="scheduleList">
+      <!-- <li>
+        <p class="itemTitle">sdfsdfs</p> 
+        <p class="itemDuration">Duration: sdfsdf</p>
+      </li> -->
+      <!-- <li>sadfasdf</li>
+      <li>asdfasdf</li> -->
+    </ul>
 
     <script src="dist/script.js" type="module"></script>
     <script src="dist/schedule.js" type="module"></script>

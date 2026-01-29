@@ -11,16 +11,9 @@ import { Schedule } from './schedule.js';
 const schedule = new Schedule();
 
 
-
 // Push button
-showButton.addEventListener('click', () => {
-    schedule.getSchedule()
-});
-
 itemForm.addEventListener('submit', () => { 
     schedule.addItem( itemForm )
+    schedule.renderSchedule();
 });
 
-removeButton.addEventListener('click', () => {
-    schedule.removeItem()
-});

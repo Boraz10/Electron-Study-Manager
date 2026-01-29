@@ -4,7 +4,11 @@ const Store = require('electron-store').default;
 // const fs = require('fs');
 // const path = require('path');
 
- const store = new Store();
+ const store = new Store({
+  defaults: {
+    schedule: []
+  }
+ });
 
 
 const createWindow = () => {
@@ -31,16 +35,16 @@ const createWindow = () => {
     store.set('schedule', schedules);
   });
 
-  ipcMain.handle('add-item', (_, schedule) => {
-    const schedules = store.get('schedule') || [];
-    schedules.push(schedule);
-    store.set('schedule', schedules);
+  ipcMain.handle('add-item', (_, item) => {
+    const schedule = store.get('schedule') || [];
+    schedule.push(item);
+    store.set('schedule', schedule);
   });
 
-  ipcMain.handle('remove-last-item', () => {
-    const schedules = store.get('schedule') || [];
-    schedules.pop();
-    store.set('schedule', schedules);
+  ipcMain.handle('remove-item', (_, index) => {
+    const schedule = store.get('schedule') || [];
+    schedule.splice(index, 1);
+    store.set('schedule', schedule);
   });
 
 app.whenReady().then(() => {
