@@ -44,3 +44,22 @@ ul#scheduleList li p {
   background: #ff4d4d;
   transform: scale(1.1);
 }
+
+
+.drop-indicator {
+  height: 10px;
+  background: #4da3ff;
+  border-radius: 2px;
+  margin: 4px 0;
+  transition: transform 0.15s ease;
+  width: 40%;
+  max-width: 40%;
+}
+
+li.dragging {
+    opacity: 0.3;
+}
+
+li {
+  transition: background 0.15s ease;
+}

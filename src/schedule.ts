@@ -1,9 +1,14 @@
+import { clear } from "node:console";
 import { Item } from "./item";
 // import * as fs from "fs";
 
 // const filePath = "schedule.json";
 const scheduleUl = document.getElementById("scheduleList") as HTMLUListElement;
+
 let draggedIndex: number | null = null;
+let hoverIndex: number | null = null;
+let indicator: HTMLDivElement | null = null;
+
 let schedule: Item[] = [];
 let binOpen = false as boolean;
 const bin = document.getElementById("binElement") as HTMLDivElement;
@@ -109,38 +114,69 @@ export class Schedule {
     async moveTask(from: number, to: number)  {
         if (to < 0 || to >= schedule.length) return;
 
+        const prevPositions = this.getPositions();
+
         const [moved] = schedule.splice(from, 1);
+
         if (moved) {
             schedule.splice(to, 0, moved);
         }
 
         await this.saveSchedule();
         this.renderSchedule();
+
+        requestAnimationFrame(() => {
+            this.animateReorder(prevPositions);
+        });
     }
 
     attachDragHandlers(li: HTMLLIElement) {
         li.addEventListener("dragstart", (e) => {
             draggedIndex = Number(li.dataset.index);
             li.classList.add("dragging");
+            li.style.cursor = 'grab';
+
+            // let offset
+
+            // e.dataTransfer?.setDragImage(li, 0, 0);
         });
 
         li.addEventListener("dragend", () => {
-              draggedIndex = null;
+            draggedIndex = null;
             li.classList.remove("dragging");
+            this.clearIndicator();
             binOpen = false;
         });
 
         li.addEventListener("dragover", (e) => {
             e.preventDefault();
+            if (draggedIndex == null) return;
+
+            const targetIndex = Number(li.dataset.index);
+            const rect = li.getBoundingClientRect();
+            const before = e.clientY < rect.top + rect.height / 2;
+
+            hoverIndex = before ? targetIndex : targetIndex + 1;
+
+            this.showIndicator(hoverIndex);
            
         });
 
-        li.addEventListener("drop", () => {
-            if (draggedIndex == null) return;
-            else {   
-                const targetIndex = Number(li.dataset.index)
-                this.moveTask(draggedIndex, targetIndex);
-                }
+        li.addEventListener("drop", async () => {
+            if (draggedIndex == null || hoverIndex == null) return;
+
+            const from = draggedIndex;
+            let to = hoverIndex;
+
+            // removing the item first
+            if (to > from) to--;
+
+            await this.moveTask(from, to);
+            this.clearIndicator();
+            // else {   
+            //     const targetIndex = Number(li.dataset.index)
+            //     this.moveTask(draggedIndex, targetIndex);
+            //     }
 
         });
 
@@ -179,6 +215,65 @@ export class Schedule {
             bin.classList.remove("open");
         });
 
+    }
+
+    showIndicator(index: number) {
+        if (!indicator) {
+            indicator = document.createElement("div");
+            indicator.className = "drop-indicator";
+        }
+
+        const children = Array.from(scheduleUl.children);
+
+        if (index >= children.length) {
+            scheduleUl.appendChild(indicator);
+        }
+        else {
+            const targetChild = children[index];
+            if (targetChild) {
+                scheduleUl.insertBefore(indicator, targetChild);
+            }
+        }
+    }
+
+    clearIndicator() {
+        indicator?.remove();
+        indicator = null;
+        hoverIndex = null;
+    }
+
+    getPositions(): Map<Element, DOMRect> {
+        const map = new Map<Element, DOMRect>();
+
+        [...scheduleUl.children].forEach(el => {
+            map.set(el, el.getBoundingClientRect())
+        });
+
+        return map;
+    }
+
+    animateReorder(prev: Map<Element, DOMRect>) {
+        [...scheduleUl.children].forEach(el => {
+            const oldRect = prev.get(el);
+            if (!oldRect) return;
+
+            const newRect = el.getBoundingClientRect();
+            const dx = oldRect.left - newRect.left;
+            const dy = oldRect.top - newRect.top;
+
+            if (dx || dy) {
+                el.animate(
+                    [
+                        { transform: `translate(${dx}px, ${dy}px)` },
+                        { transform: 'translate(0, 0)' }
+                    ],
+                    {
+                        duration: 180,
+                        easing: "ease-out"
+                    }
+                ); 
+            }
+        });
     }
 
  
