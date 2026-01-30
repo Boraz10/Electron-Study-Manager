@@ -23,7 +23,7 @@ const createWindow = () => {
     }
   })
 
-  win.loadFile('index.html')
+  win.loadFile('landing.html')
 }
 
  //IPC Handlers
