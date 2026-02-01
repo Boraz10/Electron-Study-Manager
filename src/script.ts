@@ -11,6 +11,9 @@ import { Schedule } from './schedule.js';
 const schedule = new Schedule();
 
 
+let currentPage = window.location.href;
+
+
 // Push button
 itemForm.addEventListener('submit', () => { 
     schedule.addItem( itemForm )

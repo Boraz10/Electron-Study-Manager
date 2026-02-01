@@ -7,10 +7,13 @@
 </head>
 <body>
     <a href="landing.html"><button><<</button></a>
-    <h3>Current task: Coding</h3>
-    <h2>Time Left: 30 minutes</h2>
-    <button>Next task</button>
-    <h5>total time left: 4:30:30</h5>
+    <h3>Current task: <h3 id="currentTask">Loading...</h3> </h3>
+    <h2>Time Left: <h2 id="currentTimeLeft">Loading...</h2> </h2>
+    <button id="nextTask">Next task</button>
+    <h5>total time left: <h5 id="totalTimeLeft">Loading...</h5> </h5>
+
+    <script type="module" src="dist/timer.js"></script>
+    <!-- <script src="dist/script.js" type="module"></script> -->
     
 </body>
 </html>
