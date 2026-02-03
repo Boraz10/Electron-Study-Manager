@@ -25,6 +25,7 @@ export class Schedule {
         console.log("Schedule loaded.");
         this.loadSchedule();
         this.handleBin();
+        this.attachListDragHandlers();
     }
 
     addItem(itemForm: HTMLFormElement) :  void {
@@ -149,40 +150,50 @@ export class Schedule {
             this.clearIndicator();
             binOpen = false;
         });
+    }
 
-        li.addEventListener("dragover", (e) => {
+    attachListDragHandlers() {
+        scheduleUl.addEventListener("dragover", (e) => {
             e.preventDefault();
             if (draggedIndex == null) return;
 
-            const targetIndex = Number(li.dataset.index);
-            const rect = li.getBoundingClientRect();
-            const before = e.clientY < rect.top + rect.height / 2;
+            const rect = scheduleUl.getBoundingClientRect();
+            const y = e.clientY - rect.top;
 
-            hoverIndex = before ? targetIndex : targetIndex + 1;
+            // Find the insertion point
+            const children = Array.from(scheduleUl.children).filter(el => !el.classList.contains("drop-indicator"));
+            let insertIndex = children.length;
 
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                if (!child) continue;
+                const childRect = child.getBoundingClientRect();
+                const childY = childRect.top - rect.top;
+                const childHeight = childRect.height;
+
+                if (y < childY + childHeight / 2) {
+                    insertIndex = i;
+                    break;
+                }
+            }
+
+            hoverIndex = insertIndex;
             this.showIndicator(hoverIndex);
-           
         });
 
-        li.addEventListener("drop", async () => {
+        scheduleUl.addEventListener("drop", async (e) => {
+            e.preventDefault();
             if (draggedIndex == null || hoverIndex == null) return;
 
             const from = draggedIndex;
             let to = hoverIndex;
 
-            // removing the item first
+            // Adjust for removal
             if (to > from) to--;
 
             await this.moveTask(from, to);
             this.clearIndicator();
-            // else {   
-            //     const targetIndex = Number(li.dataset.index)
-            //     this.moveTask(draggedIndex, targetIndex);
-            //     }
-
         });
-
-        
     }
 
     async loadSchedule() {

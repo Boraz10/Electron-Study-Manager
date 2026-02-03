@@ -10,11 +10,19 @@ const Store = require('electron-store').default;
   }
  });
 
+ let win;
+
 
 const createWindow = () => {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+  win = new BrowserWindow({
+    width: 480,
+    height: 640,
+    frame: false,
+    resizable: false,
+    transparent: true,
+  //  // titleBarStyle: 'hidden',
+   autoHideMenuBar: true,
+     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
 
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -23,7 +31,7 @@ const createWindow = () => {
     }
   })
 
-  win.loadFile('landing.html')
+  win.loadFile('index.html')
 }
 
  //IPC Handlers
@@ -45,6 +53,19 @@ const createWindow = () => {
     const schedule = store.get('schedule') || [];
     schedule.splice(index, 1);
     store.set('schedule', schedule);
+  });
+
+  //Minimize and Close window handlers
+  ipcMain.on('minimize-window', () => {
+    if (win) {
+      win.minimize();
+    }
+  });
+
+  ipcMain.on('close-window', () => {
+    if (win) {
+      win.close();
+    }
   });
 
 app.whenReady().then(() => {

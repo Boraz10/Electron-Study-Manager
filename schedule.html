@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Test App!</title>
+</head>
+<body>
+   <div class="titlebar">
+        <div id="titlebarText">
+            <p>Electron Study Manager - Schedule</p>
+        </div>
+        <div class="titlebar_buttons">
+            <button id="minimizeBtn"></button>
+            <button id="closeBtn"></button>
+        </div>
+    </div>
+
+  <div class="content">
+    <a href="index.html"><button><<</button></a>
+      <h1>Study Schedule</h1>
+      <p>description</p>
+      <button id="bodyButton">Show schedule</button>
+
+      <form action="#" method="post" id="itemForm">
+        <label for="taskName">Task Name:</label><br>
+        <input type="text" id="taskName" name="taskName"><br>
+        <label for="taskDuration">Task Duration (minutes):</label><br>
+        <!--TODO: Make this a dropdown thing where the user can select time or whatever-->
+        <input type="number" id="taskDuration" name="taskDuration" ><br>
+        <input type="submit" value="Add item to schedule">
+      </form>
+
+      <div id="binElement">  </div>
+      <div class="scroll_box">
+        <ul id="scheduleList">
+          <!-- <li>
+            <p class="itemTitle">sdfsdfs</p> 
+            <p class="itemDuration">Duration: sdfsdf</p>
+          </li> -->
+          <!-- <li>sadfasdf</li>
+          <li>asdfasdf</li> -->
+        </ul>
+      </div>
+      <a href="index.html"><button>Save and exit</button></a>
+    </div>
+
+    <script src="dist/script.js" type="module"></script>
+    <script src="dist/schedule.js" type="module"></script>
+    
+</body>
+</html>

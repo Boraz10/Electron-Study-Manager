@@ -7,3 +7,8 @@ contextBridge.exposeInMainWorld('scheduleAPI', {
     addItem: (item) => ipcRenderer.invoke('add-item', item),
     removeItem: (index) => ipcRenderer.invoke('remove-item', index)
 });
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  minimizeWindow: () => ipcRenderer.send('minimize-window'),
+    closeWindow: () => ipcRenderer.send('close-window')
+});

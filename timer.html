@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <a href="landing.html"><button><<</button></a>
-    <h3>Current task: <h3 id="currentTask">Loading...</h3> </h3>
-    <h2>Time Left: <h2 id="currentTimeLeft">Loading...</h2> </h2>
-    <button id="nextTask">Next task</button>
-    <h5>total time left: <h5 id="totalTimeLeft">Loading...</h5> </h5>
+     <div class="titlebar">
+        <div id="titlebarText">
+            <p>Electron Study Manager - Timer</p>
+        </div>
+        <div class="titlebar_buttons">
+            <button id="minimizeBtn"></button>
+            <button id="closeBtn"></button>
+        </div>
+    </div>
+    <div class="content">
+        <a href="index.html"><button><<</button></a>
+        <div id="timerDisplay">
+            <h3>Current task: <h3 id="currentTask">Loading...</h3> </h3>
+            <h2>Time Left: <h2 id="currentTimeLeft">Loading...</h2> </h2>
+            <button id="nextTask">Next task</button>
+            <h5>total time left: <h5 id="totalTimeLeft">Loading...</h5> </h5>
+        </div>
+    </div>
 
     <script type="module" src="dist/timer.js"></script>
     <!-- <script src="dist/script.js" type="module"></script> -->

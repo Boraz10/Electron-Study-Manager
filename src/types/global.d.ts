@@ -8,5 +8,10 @@ declare global {
       addItem: (item: any) => Promise<any>;
       removeItem: (index: Number) => Promise<any>;
     };
+
+    electronAPI: {
+      minimizeWindow: () => void;
+      closeWindow: () => void;
+    };
   }
 }

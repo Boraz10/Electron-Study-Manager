@@ -9,6 +9,8 @@ import { Item } from "./item";
 
 let totalTimeRemaining = 0 as number;
 let totalSecondsRemaining = 0 as number;
+let currentTaskSeconds = 0 as number;
+let currentTaskName = "" as string;
 
 let skipCurrentTask = false;
 
@@ -18,7 +20,7 @@ nextButton.addEventListener('click', () => {
     skipCurrentTask = true;
 });
 
-// Function to start the total countdown
+// Function to start the total countdown and handle current task
 function startTotalCountdown() {
     const interval = setInterval(() => {
         if (totalSecondsRemaining <= 0) {
@@ -29,17 +31,44 @@ function startTotalCountdown() {
 
         totalSecondsRemaining--;
 
+        // Decrement current task if active
+        if (currentTaskSeconds > 0 && !skipCurrentTask) {
+            currentTaskSeconds--;
+        }
+
+        // Update total time display
         const hours = Math.floor(totalSecondsRemaining / 3600) as number;
         const minutes = Math.floor((totalSecondsRemaining % 3600) / 60) as number;
         const seconds = totalSecondsRemaining % 60 as number;
 
-        let innerElement = document.getElementById("totalTimeLeft") as HTMLElement;
-        if (innerElement) {
-            innerElement.innerText = (
+        let totalElement = document.getElementById("totalTimeLeft") as HTMLElement;
+        if (totalElement) {
+            totalElement.innerText = (
             `${String(hours).padStart(2, "0")}:` +
             `${String(minutes).padStart(2, "0")}:` +
             `${String(seconds).padStart(2, "0")}`
             );
+        }
+
+        // Update current task display
+        if (currentTaskSeconds > 0) {
+            const cHours = Math.floor(currentTaskSeconds / 3600) as number;
+            const cMinutes = Math.floor((currentTaskSeconds % 3600) / 60) as number;
+            const cSeconds = currentTaskSeconds % 60 as number;
+
+            let currentElement = document.getElementById("currentTimeLeft") as HTMLElement;
+            if (currentElement) {
+                currentElement.innerText = (
+                `${String(cHours).padStart(2, "0")}:` +
+                `${String(cMinutes).padStart(2, "0")}:` +
+                `${String(cSeconds).padStart(2, "0")}`
+                );
+            }
+        }
+
+        // Check if current task is done
+        if (currentTaskSeconds <= 0 && currentTaskName !== "") {
+            // Task completed, will be handled by the promise
         }
     }, 1000);
 }
@@ -48,6 +77,15 @@ function startTotalCountdown() {
 // Access the schedule
 async function processSchedule() {
     const schedule: Item[] = await window.scheduleAPI.getSchedule();
+
+    if (schedule.length === 0) {
+        console.log("No items in schedule.");
+        let innerElement = document.getElementById("timerDisplay") as HTMLElement;
+        if (innerElement) {
+            innerElement.innerHTML = "<h3>No items in schedule.</h3>";
+        }
+        return;
+    }
 
     //console.log(schedule);
 
@@ -69,56 +107,37 @@ async function processSchedule() {
     for (let i = 0; i < schedule.length; i++) {
         if (schedule[i]?.duration) {
             let currentDuration = +(schedule[i]?.duration ?? 0) as number;
-            let currentTaskName = schedule[i]?.title ?? "noName";
+            currentTaskName = schedule[i]?.title ?? "noName";
+            currentTaskSeconds = Math.floor(currentDuration * 60);
             const nameElement = document.getElementById("currentTask");
             if (nameElement) {
                 nameElement.innerText = currentTaskName;
             }
 
-            await countdown(currentDuration, "currentTimeLeft");
+            // Wait for the task to complete
+            await new Promise<void>((resolve) => {
+                const checkComplete = () => {
+                    if (currentTaskSeconds <= 0 || skipCurrentTask) {
+                        if (skipCurrentTask) {
+                            totalSecondsRemaining -= currentTaskSeconds;
+                            if (totalSecondsRemaining < 0) totalSecondsRemaining = 0;
+                            skipCurrentTask = false;
+                        }
+                        currentTaskSeconds = 0;
+                        resolve();
+                    } else {
+                        setTimeout(checkComplete, 100); // Check every 100ms
+                    }
+                };
+                checkComplete();
+            });
         }
     }
     console.log("time completely up");
-    // TODO: Here I would put my code to handle what happens when the timer is up
-}
-
-function countdown(totalMinutes : number, htmlID : string): Promise<void> {
-    return new Promise((resolve) => {
-        skipCurrentTask = false;
-        let totalSeconds = Math.floor(totalMinutes * 60) + 1 as number;
-
-        const interval = setInterval(() => {
-            if (skipCurrentTask) {
-                clearInterval(interval);
-                // Subtract the remaining time from total
-                totalSecondsRemaining -= totalSeconds;
-                if (totalSecondsRemaining < 0) totalSecondsRemaining = 0;
-                resolve();
-                return;
-            }
-
-            if (totalSeconds <= 0) {
-                clearInterval(interval);
-                resolve();
-                return;
-            }
-
-            totalSeconds--;
-
-            const hours = Math.floor(totalSeconds / 3600) as number;
-            const minutes = Math.floor((totalSeconds % 3600) / 60) as number;
-            const seconds = totalSeconds % 60 as number;
-
-            let innerElement = document.getElementById(htmlID) as HTMLElement;
-            if (innerElement) {
-                innerElement.innerText = (
-                `${String(hours).padStart(2, "0")}:` +
-                `${String(minutes).padStart(2, "0")}:` +
-                `${String(seconds).padStart(2, "0")}`
-                );
-            }
-        }, 1000 );
-    });
+    let innerElement = document.getElementById("timerDisplay") as HTMLElement;
+        if (innerElement) {
+            innerElement.innerHTML = "<h3>All done! Good Job. <br> <a href='index.html'><button>Return to menu</button></a></h3>";
+        }
 }
 
 processSchedule();
