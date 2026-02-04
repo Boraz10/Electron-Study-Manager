@@ -1,5 +1,13 @@
 * {
     font-family: "Pixelify Sans", sans-serif;
+    user-select: none; 
+}
+
+a  {
+    text-decoration: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    /* Also prevents selecting the text while trying to drag */
 }
 
 ul#scheduleList {
@@ -171,4 +179,48 @@ button {
     border-top: none;
     height: 550px;
     padding:10px;
+}
+
+.backButton {
+    display: inline-block;
+    height:55px;
+    width: 65px;
+    background-color: transparent;
+    background-image: url("../Assets/back_button.png");
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.backButton:hover {
+    background-image: url("../Assets/back_button_hover.png");
+    cursor: pointer;
+}
+
+.backButton:active {
+    background-image: url("../Assets/back_button_down.png");
+    padding-bottom:0px;
+}
+
+.mediumButton {
+    height: 55px;
+    width: 170px;
+    border: none;
+    background-image: url("../Assets/next_button.png");
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 25px;
+    transition: transform 0.2s ease-in-out;
+    padding-bottom:10px;
+}
+
+.mediumButton:hover {
+    background-image: url("../Assets/next_button_hover.png");
+    transform: scale(1.03);
+}
+
+.mediumButton:active {
+    background-image: url("../Assets/next_button_down.png");
+    padding-bottom:0px;
 }

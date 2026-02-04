@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    
+
     <div class="titlebar">
         <div id="titlebarText">
             <p>Electron Study Manager - Home</p>
@@ -24,12 +25,12 @@
     <div class="content">
         <p id="currentDate"></p>
         <p id="currentTime"></p>
-        <p>Welcome, user!</p>
-        <a href="timer.html">Start studying</a>
-        <a href="schedule.html">Edit schedule</a>
+        <h1 id="greeting">Good morning, user!</h1>
+        <a href="timer.html"><button class="bigbutton">Start studying</button></a>
+        <a href="schedule.html"><button class="bigbutton">Edit schedule</button></a>
     </div>
 
-
+    <script type="module" src="dist/script.js"></script>
     <script type="module" src="dist/date.js"></script>
     <script type="module" src="dist/handle_window_controls.js"></script>
 
