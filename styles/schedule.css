@@ -1,0 +1,240 @@
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    text-align: left;
+}
+
+ul#scheduleList {
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+ul#scheduleList li {
+    background-image: url("../Assets/task-element.png");
+    margin-bottom: 10px;
+    width:225px;
+    height: 85px;
+    text-align: center;
+    scale: 0.9;
+    
+}
+
+.task-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+
+
+ul#scheduleList li:hover {
+    background-image: url("../Assets/task-element_hover.png");
+    cursor: pointer;
+}
+
+.dragging {
+    background: #ff4d4d;
+    transform: scale(1.1);
+    cursor: grab;
+}
+
+
+ul#scheduleList li p {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+
+/* up and down elements */
+.up, .down {
+    background-color: transparent  ;
+    background-image: url("../Assets/movementbutton.png");
+    border: none;
+    height:25px ;
+    width: 40px;
+    margin: 10px;
+}
+
+.up {
+    grid-area: 1 / 1 / 2 / 2;
+    margin-top:10px;
+}
+
+.down {
+    grid-area: 2 / 1 / 3 / 2;
+    margin-top:0px;
+    margin-bottom: 10px;
+}
+
+.task-info {
+     grid-area: 1 / 2 / 3 / 3;
+     margin-top: 17px;
+     font-size: 20px;
+}
+
+.delete {
+    grid-area: 1 / 3 / 3 / 4;
+    margin: auto;
+    margin-top: 45px;
+    margin-left: 35px;
+}
+
+
+
+.up:hover, .down:hover {
+    background-image: url("../Assets/movementbutton_down.png");
+    cursor: pointer;
+}
+
+/* delete task element */
+.delete {
+    background-color: transparent  ;
+    background-image: url("../Assets/removebutton.png");
+    border: none;
+    height:25px ;
+    width: 25px;
+    font-size: 20px;
+}
+
+.delete:hover {
+    background-image: url("../Assets/removebuttondown.png");
+    cursor: pointer;
+}
+
+.up:active, .down:active, .delete:active {
+    filter: saturate(0%);
+}
+
+
+
+
+
+#binElement {
+    width: 65px;
+    height: 85px;
+    background-image: url("../Assets/bin_closed.png");
+    grid-area: 2 / 1 / 3 / 2;
+    transition: 0.3s ease;
+    margin: auto;
+    margin-right:75px;
+    margin-top: 20px;
+}
+
+#binElement.open {
+  transform: scale(1.1);
+  background-image: url("../Assets/bin_open.png");
+}
+
+
+.drop-indicator {
+  height: 10px;
+  background: #4da3ff;
+  border-radius: 2px;
+  margin: 4px 0;
+  transition: transform 0.15s ease;
+  width: 40%;
+  max-width: 40%;
+}
+
+li.dragging {
+    opacity: 0.3;
+}
+
+li {
+  transition: background 0.15s ease;
+}
+
+.rightContent {
+    grid-area: 1 / 2 / 3 / 3;
+    background-image: url("../Assets/schedule_sort_background.png");
+    height: 400px;
+    width: 275px;
+    margin-left: -10px;
+    scale: 0.93;
+}
+
+.scroll_box {
+    max-height: 400px;
+    height: 385px;
+    width: 275px;
+    overflow-y: auto;
+    margin-left: -10px;
+    margin-top: 5px;
+}
+
+.scroll_box::-webkit-scrollbar {
+    width: 20px;
+    margin-top: -20px;
+}
+
+.scroll_box::-webkit-scrollbar-thumb {
+    background-color: #e5a43b;
+    border: 9px, solud #ffffff;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.scroll_box::-webkit-scrollbar-track {
+    background: #fffcda;
+    /* margin-top: 5px;
+    margin-bottom:10px; */
+}
+
+.scroll_box::-webkit-scrollbar-thumb:hover {
+    background: #bb7c2f;
+}
+
+#itemForm {
+    grid-area: 1 / 1 / 2 / 2;
+    background-image: url("../Assets/schedule_edit_background.png");
+    height: 235px;
+    width:180px;
+    scale: 0.9;
+    margin-left: -10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#taskName, #taskDuration {
+    display: block;
+    margin-left: 15px;
+    margin-right: auto;
+    width: 70%;
+    height: 30px;
+    font-size: 18px;
+    /* padding-left: 10px; */
+    border: 2px solid #2b2922;
+    box-shadow: 5px 5px #000000, inset 3px 3px #fff, inset -3px -3px #000000;
+    background-color: #a0e16a;
+}
+
+label {
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#durationLabel {
+    margin-top: 0px;
+}
+#formSubmit {
+    font-size: 19px;
+    scale: 0.87;
+    margin-top: -5px;
+}
+
+#exitButton {
+    font-size: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -55px;
+}

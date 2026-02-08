@@ -70,13 +70,22 @@ export class Schedule {
             item.index = index;
 
             const li = document.createElement("li");
+            li.classList.add("task-item");
             li.draggable = true;
             li.dataset.index = index.toString();
 
-            const span = document.createElement("span");
-            span.textContent = `${item.title} (${item.duration} min)`;
+            const taskInfo = document.createElement("div");
+            taskInfo.classList.add("task-info");
 
-            const controls = document.createElement("div");
+            const taskName = document.createElement("div");
+            const taskDuration = document.createElement("div");
+
+            taskName.textContent = item.title;
+            taskDuration.textContent = `${item.duration} min`;
+
+            taskInfo.append(taskName, taskDuration);
+
+            // const controls = document.createElement("div");
 
             const upBtn = document.createElement("button");
             upBtn.classList.add("up");
@@ -90,8 +99,8 @@ export class Schedule {
             deleteBtn.classList.add("delete");
             deleteBtn.textContent = "×";
 
-            controls.append(upBtn, downBtn, deleteBtn);
-            li.append(span, controls);
+            // controls.append(upBtn, downBtn, deleteBtn);
+            li.append(taskInfo, upBtn, downBtn, deleteBtn);
 
             this.attachButtonHandlers(li, index);
             this.attachDragHandlers(li);

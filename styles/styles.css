@@ -1,6 +1,7 @@
 * {
     font-family: "Pixelify Sans", sans-serif;
     user-select: none; 
+    transition: 0.3s ease;
 }
 
 a  {
@@ -10,103 +11,13 @@ a  {
     /* Also prevents selecting the text while trying to drag */
 }
 
-ul#scheduleList {
-    list-style-type: none;
-}
-
-ul#scheduleList li {
-    margin-bottom: 10px;
-    color: darkblue;
-    border: solid 2px;
-    width: 40%;
-    max-width:50%;
-    padding:3px;
-    text-align: center;
-    border-radius: 5px;
-    background-color: aliceblue;
-}
-
-ul#scheduleList li:hover {
-    background-color: rgb(156, 175, 184);
-    cursor: pointer;
-}
-
-.dragging {
-    background: #ff4d4d;
-    transform: scale(1.1);
-    cursor: grab;
-}
-
-
-
-ul#scheduleList li p {
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-
-
-#binElement {
-    width: 50px;
-    height: 50px;
-    background-color: red;
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-#binElement.open {
-  background: #ff4d4d;
-  transform: scale(1.1);
-}
-
-
-.drop-indicator {
-  height: 10px;
-  background: #4da3ff;
-  border-radius: 2px;
-  margin: 4px 0;
-  transition: transform 0.15s ease;
-  width: 40%;
-  max-width: 40%;
-}
-
-li.dragging {
-    opacity: 0.3;
-}
-
-li {
-  transition: background 0.15s ease;
-}
-
 body {
     background-image: url("../Assets/bg_dawn.gif");
     margin: 0;
     padding: 0;
 }
 
-.scroll_box {
-    max-height: 400px;
-    height: 400px;
-    width: 300px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-    border: 1px solid;
-}
 
-.scroll_box::-webkit-scrollbar {
-    width: 20px;
-}
-
-.scroll_box::-webkit-scrollbar-thumb {
-    background-color: #e5a43b;
-    border: 9px, solud #ffffff;
-}
-
-.scroll_box::-webkit-scrollbar-track {
-    background: #fffcda;
-}
-
-.scroll_box::-webkit-scrollbar-thumb:hover {
-    background: #bb7c2f;
-}
 
 .titlebar {
     height:60px;

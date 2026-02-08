@@ -59,3 +59,27 @@ margin-top: 0px;
     margin-right: auto;
     margin-bottom: 60px;
 }
+
+#congrats {
+    font-size: 40px;
+    -webkit-text-stroke-width: 0.3px; 
+    margin-top: 50px;
+
+}
+
+#returnToMenu {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    display: block;
+
+}
+
+#randomTaskDisplay {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+     -webkit-text-stroke-width: 0.3px; 
+     -webkit-text-stroke-color: rgb(123, 123, 123);
+}

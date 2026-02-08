@@ -6,6 +6,7 @@
 console.log("timer loaded");
 
 import { Item } from "./item";
+import { easyProjects, mediumProjects, hardProjects } from "./tasks.js";
 
 let totalTimeRemaining = 0 as number;
 let totalSecondsRemaining = 0 as number;
@@ -112,6 +113,18 @@ async function processSchedule() {
             const nameElement = document.getElementById("currentTask");
             if (nameElement) {
                 nameElement.innerText = currentTaskName;
+
+                // if the task is a small project, display a random task to do while working on it
+                const randomElement = document.getElementById("randomTaskDisplay");
+                if (currentTaskName.toLowerCase() === "small project") {
+                    const randomTask = pickRandomTask();
+                    if (randomElement) {
+                        randomElement.innerText = `Today's task: ${randomTask}`;
+                    }
+                }
+                else {
+                    if (randomElement) randomElement.innerText = '';
+                }
             }
 
             // Wait for the task to complete
@@ -136,9 +149,28 @@ async function processSchedule() {
     console.log("time completely up");
     let innerElement = document.getElementById("timerDisplay") as HTMLElement;
         if (innerElement) {
-            innerElement.innerHTML = "<h3>All done! Good Job. <br> <a href='index.html'><button>Return to menu</button></a></h3>";
+            innerElement.innerHTML = "<h3 id='congrats'>All done! Good Job. </h3> <br> <a href='index.html'><button class='mediumButton' id='returnToMenu'>To menu</button></a>";
         }
 }
+
+function pickRandomTask() {
+    let difficulty = Math.random() * (100 - 1) + 1;
+
+    if (difficulty <= 50) {
+        // Easy task
+        const randomIndex = Math.floor(Math.random() * easyProjects.length);
+        return easyProjects[randomIndex];
+    } else if (difficulty <= 80) {
+        // Medium task
+        const randomIndex = Math.floor(Math.random() * mediumProjects.length);
+        return mediumProjects[randomIndex];
+    } else {
+        // Hard task
+        const randomIndex = Math.floor(Math.random() * hardProjects.length);
+        return hardProjects[randomIndex];
+    }
+}
+
 
 processSchedule();
 
