@@ -4,9 +4,14 @@ const Store = require('electron-store').default;
 // const fs = require('fs');
 // const path = require('path');
 
+// TODO: See if you can split the store into multiple, one for settings one for schedule
  const store = new Store({
   defaults: {
-    schedule: []
+    schedule: [],
+    username: 'User',
+    font: 'Pixelify Sans',
+    soundEnabled: true,
+    notificationsEnabled: false
   }
  });
 
@@ -68,6 +73,18 @@ const createWindow = () => {
     }
   });
 
+ // Set and get settings handlers
+ ipcMain.on('get-settings', (event, key) => {
+  const value = store.get(key);
+  event.returnValue = value;
+ });
+
+ ipcMain.on('set-settings', (event, key, value) => {
+  store.set(key, value);
+  event.returnValue = true;
+ });
+
+ 
 app.whenReady().then(() => {
  
   createWindow();

@@ -12,3 +12,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   minimizeWindow: () => ipcRenderer.send('minimize-window'),
     closeWindow: () => ipcRenderer.send('close-window')
 });
+
+contextBridge.exposeInMainWorld('settingsAPI', {
+  getSettings: (key) => ipcRenderer.sendSync('get-settings', key),
+  setSettings: (key, value) => ipcRenderer.sendSync('set-settings', key, value)
+});

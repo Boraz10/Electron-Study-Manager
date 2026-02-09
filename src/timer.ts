@@ -5,6 +5,9 @@
 
 console.log("timer loaded");
 
+// desktop notifcation settings
+let notificationPermission = window.settingsAPI.getSettings('notificationsEnabled') as boolean;
+
 import { Item } from "./item";
 import { easyProjects, mediumProjects, hardProjects } from "./tasks.js";
 
@@ -107,10 +110,16 @@ async function processSchedule() {
     // Process tasks sequentially
     for (let i = 0; i < schedule.length; i++) {
         if (schedule[i]?.duration) {
+        
             let currentDuration = +(schedule[i]?.duration ?? 0) as number;
             currentTaskName = schedule[i]?.title ?? "noName";
             currentTaskSeconds = Math.floor(currentDuration * 60);
             const nameElement = document.getElementById("currentTask");
+
+            if (notificationPermission) {
+                new window.Notification(currentTaskName, {body: `Time to start: ${currentTaskName} for ${currentDuration} minutes!`});
+            }
+
             if (nameElement) {
                 nameElement.innerText = currentTaskName;
 
@@ -149,7 +158,7 @@ async function processSchedule() {
     console.log("time completely up");
     let innerElement = document.getElementById("timerDisplay") as HTMLElement;
         if (innerElement) {
-            innerElement.innerHTML = "<h3 id='congrats'>All done! Good Job. </h3> <br> <a href='index.html'><button class='mediumButton' id='returnToMenu'>To menu</button></a>";
+            innerElement.innerHTML = "<h3 id='congrats'>All done! Good Job. </h3> <br> <a href='../index.html'><button class='mediumButton' id='returnToMenu'>To menu</button></a>";
         }
 }
 
@@ -170,6 +179,7 @@ function pickRandomTask() {
         return hardProjects[randomIndex];
     }
 }
+
 
 
 processSchedule();

@@ -13,5 +13,10 @@ declare global {
       minimizeWindow: () => void;
       closeWindow: () => void;
     };
+
+    settingsAPI: {
+      getSettings: (key: string) => any;
+      setSettings: (key: string, value: any) => void;
+    }
   }
 }

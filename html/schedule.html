@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/styles.css">
-  <link rel="stylesheet" href="styles/schedule.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../styles/schedule.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -29,14 +29,14 @@
   </div>
 
   <div class="content">
-    <a href="index.html"><button class="backButton"> << </button></a>
+    <a href="../index.html"><button class="backButton"> << </button></a>
 
     <div class="contentGrid">
       <form action="#" method="post" id="itemForm">
         <label for="taskName">Task Name:</label><br>
         <input type="text" id="taskName" name="taskName"><br>
         <label for="taskDuration" id="durationLabel">Duration (minutes):</label><br>
-        <input type="number" id="taskDuration" name="taskDuration"><br>
+        <input type="number" id="taskDuration" name="taskDuration" max="1440"><br>
         <input type="submit" class="mediumButton" id="formSubmit" value="Add to schedule">
       </form>
 
@@ -51,12 +51,14 @@
 
     </div>
     
-    <a href="index.html"><button class="mediumButton" id="exitButton">Save and exit</button></a>
+    <div id="exit">
+    <a href="../index.html"><button class="mediumButton exitButton">Save and exit</button></a>
+    </div>
   </div>
 
-  <script type="module" src="dist/script.js"></script>
-  <script src="dist/schedule.js" type="module"></script>
-  <script type="module" src="dist/handle_window_controls.js"></script>
+  <script type="module" src="../dist/script.js"></script>
+  <script src="../dist/schedule.js" type="module"></script>
+  <script type="module" src="../dist/handle_window_controls.js"></script>
 
 </body>
 

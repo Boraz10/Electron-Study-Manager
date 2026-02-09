@@ -1,19 +1,22 @@
-var showButton = document.getElementById('bodyButton') as HTMLButtonElement;
-var addButton = document.getElementById('addButton') as HTMLButtonElement;
-var removeButton = document.getElementById('removeButton') as HTMLButtonElement;
 const itemForm = document.getElementById('itemForm') as HTMLFormElement;
 
 
 console.log("Script loaded.");
+
+
+
+// set the font based on settings
+const currentFont = window.settingsAPI.getSettings('font') as string;
+
+document.documentElement.style.setProperty('--app-font', currentFont);
+
+// TODO: Set sound settings based on settings
 
 updateBackground();
 
 import { Schedule } from './schedule.js';
 
 const schedule = new Schedule();
-
-
-let currentPage = window.location.href;
 
 
 

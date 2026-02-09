@@ -1,0 +1,53 @@
+#saveSettings {
+    margin-top: 70px;
+}
+
+#fontSelect, #usernameSelect {
+     display: block;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    /* padding-left: 10px; */
+    border: 2px solid #2b2922;
+    box-shadow: 5px 5px #000000, inset 3px 3px #fff, inset -3px -3px #000000;
+    background-color: #a0e16a;
+}
+
+.settingsMenu {
+    width: 405px;
+    height: 475px;
+    background-image: url("../Assets/settings-backplate.png");
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#settingsHeading {
+    font-size: 35px;
+    font-weight: bold;
+    color: #2b2922;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+
+.textLabel {
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+input[type="checkbox"] {
+    margin-left: 30px; 
+    height: 30px;
+    width: 30px;
+    border: 2px solid #2b2922;
+    box-shadow: 5px 5px #212121, inset 3px 3px #afafaf, inset -3px -3px #000000;
+    accent-color: #4f4f4f;
+}
+
+#enableSoundLabel, #enableDesktopLabel {
+    font-size: 18px;
+    margin-left: 8px;
+    vertical-align:7px; 
+}

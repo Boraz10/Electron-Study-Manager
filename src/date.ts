@@ -3,7 +3,8 @@ const currentTime = document.getElementById('currentTime') as HTMLParagraphEleme
 
 // const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
 
-
+// Set the username based on settings
+const username = window.settingsAPI.getSettings('username') as string;
 
 function updateTime() {
     const now = new Date();
@@ -26,11 +27,11 @@ function updateTime() {
     let greeting = "Hello";
 
     if (hour < 12) {
-        greeting = "Good morning, user!";
+        greeting = `Good morning,  ${username}!`;
     } else if (hour < 18) {
-        greeting = "Good afternoon, user!";
+        greeting = `Good afternoon,  ${username}!`;
     } else {
-        greeting = "Good evening, user!";
+        greeting = `Good evening,  ${username}!`;
     }
 
     greetingElement.innerText = greeting;

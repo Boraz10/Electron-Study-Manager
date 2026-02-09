@@ -1,3 +1,7 @@
+#timerDisplay {
+    text-align: center;
+}
+
 h2 {
     text-align: center;
   -webkit-text-stroke-color: white; 
@@ -26,6 +30,13 @@ h5 {
     margin-top: 0px;
     font-size: 45px;
      -webkit-text-stroke-width: 0.5px; 
+     -webkit-line-clamp: 2; /* Limit to a maximum of 2 lines */
+      -webkit-box-orient: vertical;
+     overflow: hidden;         /* Hides the overflowing content */
+    text-overflow: ellipsis;  /* Displays an ellipsis (...) for clipped text */
+    max-width: 100%;         /* Sets the maximum width for the container */
+    display: -webkit-box;   
+
 }
 
 #timeLeftLabel {
@@ -43,13 +54,13 @@ h5 {
 
 #totalTimeLeftLabel {
     font-size: 20px;
-    margin-bottom: 0px;
+    margin-bottom: -15px;
      -webkit-text-stroke-width: 0.5px; 
 }
 
 #totalTimeLeft {
 font-size: 30px;
-margin-top: 0px;
+margin-top: 15px;
  -webkit-text-stroke-width: 0.5px; 
 }
 
@@ -71,7 +82,7 @@ margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 60px;
-    display: block;
+    display: inline-block;
 
 }
 

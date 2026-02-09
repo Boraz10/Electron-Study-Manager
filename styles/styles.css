@@ -1,5 +1,5 @@
 * {
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: var(--app-font, sans-serif);
     user-select: none; 
     transition: 0.3s ease;
 }
@@ -134,4 +134,12 @@ button {
 .mediumButton:active {
     background-image: url("../Assets/next_button_down.png");
     padding-bottom:0px;
+}
+
+.exitButton {
+    font-size: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -55px;
 }

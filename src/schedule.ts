@@ -78,7 +78,10 @@ export class Schedule {
             taskInfo.classList.add("task-info");
 
             const taskName = document.createElement("div");
+            taskName.classList.add("task-name");
+
             const taskDuration = document.createElement("div");
+            taskDuration.classList.add("task-duration");
 
             taskName.textContent = item.title;
             taskDuration.textContent = `${item.duration} min`;
@@ -300,4 +303,3 @@ export class Schedule {
 
  
 }
-

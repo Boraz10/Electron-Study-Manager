@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/settings.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="titlebar">
+        <div id="titlebarText">
+            <p>Electron Study Manager - Settings</p>
+        </div>
+        <div class="titlebar_buttons">
+            <button id="minimizeBtn"></button>
+            <button id="closeBtn"></button>
+        </div>
+
+    </div>
+    <div class="content">
+         <a href="../index.html"><button class="backButton"> << </button></a>
+
+         
+
+         <div class="settingsMenu">
+            <h2 id="settingsHeading">Settings</h2>
+            <form action="#" method="post" id="settingsForm">
+                <label for="usernameSelect" class="textLabel">Username</label>
+                <input type="text" id="usernameSelect" name="usernameSelect" placeholder="Enter username...">
+                <br>
+                <label for="fontSelect" class="textLabel">Font</label>
+                <select name="fontSelect" id="fontSelect">
+                    <option value="Bebas Neue">Bebas Neue</option>
+                    <option value="Pixelify Sans">Pixelify Sans</option>
+                    <option value="Rubik">Rubik</option>
+                </select>
+                <br>
+                <input type="checkbox" id="enableSound" name="enableSound">
+                <label for="enableSound" id="enableSoundLabel">Enable Sounds</label>
+                <br>
+                <input type="checkbox" id="enableDesktopNotifications" name="enableDesktopNotifications">
+                <label for="enableDesktopNotifications"id="enableDesktopLabel">Enable Desktop Notifications</label>
+
+                <!-- idk if i can have this button take you to the index page  -->
+                <input type="submit" class="mediumButton exitButton" id="saveSettings" value="Save settings">
+
+            </form>
+         </div>
+
+        
+    </div>
+
+    <script type="module" src="../dist/script.js"></script>
+    <script type="module" src="../dist/settings.js"></script>
+    <script type="module" src="../dist/handle_window_controls.js"></script>
+
+
+    
+</body>
+</html>
