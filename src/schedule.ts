@@ -2,10 +2,18 @@
 
 import { clear } from "node:console";
 import { Item } from "./item";
+import { playSound } from "./script.js";
 // import * as fs from "fs";
 
 // const filePath = "schedule.json";
 const scheduleUl = document.getElementById("scheduleList") as HTMLUListElement;
+
+// Sound settings
+let soundEnabled = window.settingsAPI.getSettings('soundEnabled') as boolean;
+
+// Form for adding an item
+const itemForm = document.getElementById('itemForm') as HTMLFormElement;
+
 
 let draggedIndex: number | null = null;
 let hoverIndex: number | null = null;
@@ -116,13 +124,16 @@ export class Schedule {
     attachButtonHandlers(li: HTMLLIElement, index: number) : void {
         li.querySelector(".up")?.addEventListener("click", () => {
             this.moveTask(index, index - 1);
+            if (soundEnabled) playSound('move');
         })
 
          li.querySelector(".down")?.addEventListener("click", () => {
             this.moveTask(index, index + 1);
+            if (soundEnabled) playSound('move');
         })
         li.querySelector(".delete")?.addEventListener("click", () => {
             this.removeItem(index);
+            if (soundEnabled) playSound('trash');
         })
     }
 
@@ -150,6 +161,10 @@ export class Schedule {
             draggedIndex = Number(li.dataset.index);
             li.classList.add("dragging");
             li.style.cursor = 'grab';
+
+            if (soundEnabled) {
+                playSound('button-down');
+            }
 
             // let offset
 
@@ -232,6 +247,8 @@ export class Schedule {
         bin.addEventListener("drop", async () => {
             if (draggedIndex == null) return;
 
+            if (soundEnabled) playSound('trash');
+
             this.removeItem(draggedIndex);
             this.renderSchedule();
 
@@ -303,3 +320,13 @@ export class Schedule {
 
  
 }
+
+
+const scheduleThing = new Schedule();
+
+// Push button
+itemForm.addEventListener('submit', () => { 
+    scheduleThing.addItem( itemForm )
+    scheduleThing.renderSchedule();
+});
+

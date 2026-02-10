@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="../styles/timer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jacquard+12&family=Jacquard+24&family=Jacquarda+Bastarda+9&family=Jersey+25&family=Micro+5&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Tiny5&display=swap" rel="stylesheet">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" /> -->
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <title>Electron Study Manager - Timer</title>
 </head>
 <body>
      <div class="titlebar">
@@ -21,12 +23,12 @@
         </div>
     </div>
     <div class="content">
-        <a href="../index.html"><button class="backButton"><<</button></a>
+        <a href="../index.html"><button class="backButton clickable"><<</button></a>
         <div id="timerDisplay">
             <h3 id="currentTaskLabel">Current task: <h3 id="currentTask">Loading...</h3> </h3>
             <h4 id="randomTaskDisplay"></h4>
             <h2 id="timeLeftLabel">Time Left: <h2 id="currentTimeLeft">Loading...</h2> </h2>
-            <button class="mediumButton" id="nextTask">Next task</button>
+            <button class="mediumButton clickable" id="nextTask">Next task</button>
             <h5 id="totalTimeLeftLabel">total time left: <h5 id="totalTimeLeft">Loading...</h5> </h5>
         </div>
     </div>

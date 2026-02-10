@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="../styles/settings.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jacquard+12&family=Jacquard+24&family=Jacquarda+Bastarda+9&family=Jersey+25&family=Micro+5&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Tiny5&display=swap" rel="stylesheet">
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" /> -->
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <title>Electron Study Manager - Settings</title>
 </head>
 <body>
 
@@ -23,7 +26,7 @@
 
     </div>
     <div class="content">
-         <a href="../index.html"><button class="backButton"> << </button></a>
+         <a href="../index.html"><button class="backButton clickable"> << </button></a>
 
          
 
@@ -38,6 +41,12 @@
                     <option value="Bebas Neue">Bebas Neue</option>
                     <option value="Pixelify Sans">Pixelify Sans</option>
                     <option value="Rubik">Rubik</option>
+                    <option value="Jacquard 24">Jacquard 24</option>
+                    <option value="Jacquard 12">Jacquard 12</option>
+                    <!-- <option value="Jacquarda Bastarda 9">Jacquarda Bastarda 9</option> -->
+                    <option value="Jersey 25">Jersey 25</option>
+                    <option value="Tiny5">Tiny5</option>
+                    <option value="Micro 5">Micro 5</option>
                 </select>
                 <br>
                 <input type="checkbox" id="enableSound" name="enableSound">
@@ -47,7 +56,7 @@
                 <label for="enableDesktopNotifications"id="enableDesktopLabel">Enable Desktop Notifications</label>
 
                 <!-- idk if i can have this button take you to the index page  -->
-                <input type="submit" class="mediumButton exitButton" id="saveSettings" value="Save settings">
+                <input type="submit" class="mediumButton exitButton clickable" id="saveSettings" value="Save settings">
 
             </form>
          </div>

@@ -5,16 +5,15 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../styles/styles.css">
   <link rel="stylesheet" href="../styles/schedule.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-    rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jacquard+12&family=Jacquard+24&family=Jacquarda+Bastarda+9&family=Jersey+25&family=Micro+5&family=Pixelify+Sans:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Tiny5&display=swap" rel="stylesheet">
+
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" /> -->
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-  <title>Test App!</title>
+  <title>Electron Study Manager - Schedule!</title>
 </head>
 
 <body>
@@ -29,7 +28,7 @@
   </div>
 
   <div class="content">
-    <a href="../index.html"><button class="backButton"> << </button></a>
+    <a href="../index.html"><button class="backButton clickable"> << </button></a>
 
     <div class="contentGrid">
       <form action="#" method="post" id="itemForm">
@@ -37,7 +36,7 @@
         <input type="text" id="taskName" name="taskName"><br>
         <label for="taskDuration" id="durationLabel">Duration (minutes):</label><br>
         <input type="number" id="taskDuration" name="taskDuration" max="1440"><br>
-        <input type="submit" class="mediumButton" id="formSubmit" value="Add to schedule">
+        <input type="submit" class="mediumButton clickable" id="formSubmit" value="Add to schedule">
       </form>
 
       <div id="binElement"> </div>
@@ -52,7 +51,7 @@
     </div>
     
     <div id="exit">
-    <a href="../index.html"><button class="mediumButton exitButton">Save and exit</button></a>
+    <a href="../index.html"><button class="mediumButton exitButton clickable">Save and exit</button></a>
     </div>
   </div>
 

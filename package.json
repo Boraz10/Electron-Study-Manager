@@ -1,5 +1,6 @@
 {
   "name": "electron-study-manager",
+  "displayName": "Electron Study Manager",
   "version": "1.0.0",
   "description": "Simple study manager and timer built with electron",
   "license": "ISC",

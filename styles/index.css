@@ -69,3 +69,40 @@
     background-image: url("../Assets/settingsbutton_down.png");
     padding-bottom:0px;
 }
+
+.dogbutton {
+    display: inline-block;
+    background-image: url('../Assets/doggy-Sheet2.png');
+    position: fixed;
+    height:70px;
+    width:80px;
+    margin-top: -30px;
+    background-color: transparent;
+    border: none;
+     margin-bottom: -10px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: auto;
+    scale: 0.9;
+    transform: scaleX(-1);
+    background-position: 0 0; /* Start at the first frame */
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+@keyframes play {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: -160px;
+    }
+    }
+
+.dogbutton:hover {
+
+
+    animation: play 0.25s steps(2) infinite;
+
+}
+

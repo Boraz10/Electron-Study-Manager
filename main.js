@@ -1,8 +1,9 @@
-const { app, BrowserWindow, ipcMain } = require('electron/main');
+const { app, BrowserWindow, ipcMain, shell, session } = require('electron/main');
 const path = require('node:path');
 const Store = require('electron-store').default;
 // const fs = require('fs');
 // const path = require('path');
+
 
 // TODO: See if you can split the store into multiple, one for settings one for schedule
  const store = new Store({
@@ -35,6 +36,15 @@ const createWindow = () => {
       nodeIntegration: false
     }
   })
+
+   win.webContents.setWindowOpenHandler((details) => {
+    // Check if the URL is an external website
+    if (details.url.startsWith('http:') || details.url.startsWith('https:')) {
+      shell.openExternal(details.url); // Open URL in user's browser
+    }
+    return { action: 'deny' }; // Prevent the app from opening the URL internally
+  });
+
 
   win.loadFile('index.html')
 }
@@ -84,8 +94,17 @@ const createWindow = () => {
   event.returnValue = true;
  });
 
- 
+
 app.whenReady().then(() => {
+
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ["default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self';"]
+      }
+    });
+  });
  
   createWindow();
 

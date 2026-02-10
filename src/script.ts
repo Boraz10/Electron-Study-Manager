@@ -1,23 +1,48 @@
-const itemForm = document.getElementById('itemForm') as HTMLFormElement;
-
+// Global script
 
 console.log("Script loaded.");
 
+// set the font based on settings, defaulting to Pixelify Sans
 
+const fontMap: Record<string, string> = {
+  "Bebas Neue": "'Bebas Neue', sans-serif",
+  "Pixelify Sans": "'Pixelify Sans', sans-serif",
+  "Rubik": "'Rubik', sans-serif",
+  "Jacquard 24": "'Jacquard 24', serif",
+  "Jacquard 12": "'Jacquard 12', serif",
+//   "Jacquarda Bastarda 9": "'Jacquarda Bastarda 9', serif",
+  "Jersey 25": "'Jersey 25', sans-serif",
+  "Tiny5": "'Tiny5', monospace",
+  "Micro 5": "'Micro 5', monospace",
+};
 
-// set the font based on settings
 const currentFont = window.settingsAPI.getSettings('font') as string;
 
-document.documentElement.style.setProperty('--app-font', currentFont);
+document.documentElement.style.setProperty(
+  '--app-font',
+  fontMap[currentFont] ?? "'Pixelify Sans', sans-serif"
+);
 
-// TODO: Set sound settings based on settings
+// Handle sounds
+const soundEnabled = window.settingsAPI.getSettings('soundEnabled') as boolean;
+if (soundEnabled) playSound('button_up');
+
+if (soundEnabled) {
+    let buttons = document.querySelectorAll<HTMLElement>('.clickable');
+    if (buttons) {
+        for (const button of buttons) {
+            button.addEventListener('mousedown', () => {
+                playSound('button_down');
+            });
+
+            button.addEventListener('mouseup', () => {
+                playSound('button_up');
+            });
+        }
+    }
+}
 
 updateBackground();
-
-import { Schedule } from './schedule.js';
-
-const schedule = new Schedule();
-
 
 
 // update bacxkground based on page
@@ -46,9 +71,8 @@ function updateBackground() {
         document.body.style.backgroundColor = bgColor;
 }
 
-// Push button
-itemForm.addEventListener('submit', () => { 
-    schedule.addItem( itemForm )
-    schedule.renderSchedule();
-});
+export function playSound(sound: string) {
+    const audio = new Audio(`../Assets/Audio/${sound}.wav`);
+    audio.play();
+}
 

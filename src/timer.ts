@@ -8,7 +8,13 @@ console.log("timer loaded");
 // desktop notifcation settings
 let notificationPermission = window.settingsAPI.getSettings('notificationsEnabled') as boolean;
 
+// Sound settings
+let soundEnabled = window.settingsAPI.getSettings('soundEnabled') as boolean;
+
 import { Item } from "./item";
+
+import { playSound } from "./script.js";
+
 import { easyProjects, mediumProjects, hardProjects } from "./tasks.js";
 
 let totalTimeRemaining = 0 as number;
@@ -120,6 +126,10 @@ async function processSchedule() {
                 new window.Notification(currentTaskName, {body: `Time to start: ${currentTaskName} for ${currentDuration} minutes!`});
             }
 
+            if (soundEnabled) {
+                playSound('alarm');
+            }
+
             if (nameElement) {
                 nameElement.innerText = currentTaskName;
 
@@ -157,9 +167,15 @@ async function processSchedule() {
     }
     console.log("time completely up");
     let innerElement = document.getElementById("timerDisplay") as HTMLElement;
-        if (innerElement) {
-            innerElement.innerHTML = "<h3 id='congrats'>All done! Good Job. </h3> <br> <a href='../index.html'><button class='mediumButton' id='returnToMenu'>To menu</button></a>";
-        }
+    if (innerElement) {
+        innerElement.innerHTML = "<h3 id='congrats'>All done! Good Job. </h3> <br> <a href='../index.html'><button class='mediumButton clickable' id='returnToMenu'>To menu</button></a>";
+    }
+    if (notificationPermission) {
+        new window.Notification("Done!", {body: `You're done for the day! good job!`});
+    }
+
+    if (soundEnabled) playSound('alarm');
+
 }
 
 function pickRandomTask() {
@@ -183,9 +199,3 @@ function pickRandomTask() {
 
 
 processSchedule();
-
-
-
-// Calculate the current task and how much time it has left
-
-// Handle counting down
