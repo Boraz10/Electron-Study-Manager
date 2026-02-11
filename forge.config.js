@@ -48,8 +48,8 @@ module.exports = {
     name: '@electron-forge/publisher-github',
     config: {
       repository: {
-        owner: 'your-username',
-        name: 'your-repo'
+        owner: 'Boraz10',
+        name: 'Electron-Study-Manager'
       },
       draft: false,
       prerelease: false
