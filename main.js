@@ -1,8 +1,12 @@
-const { app, BrowserWindow, ipcMain, shell, session } = require('electron/main');
+const { app, BrowserWindow, ipcMain, shell, session, nativeImage } = require('electron/main');
 const path = require('node:path');
 const Store = require('electron-store').default;
 // const fs = require('fs');
 // const path = require('path');
+
+if (process.platform === 'win32') {
+  app.setAppUserModelId("Electron Study Manager");
+}
 
 
 // TODO: See if you can split the store into multiple, one for settings one for schedule
@@ -20,9 +24,14 @@ const Store = require('electron-store').default;
 
 
 const createWindow = () => {
+  // Icon
+  const iconPath = path.join(__dirname, './Assets/Icons/icon.ico');
+  const iconImage = nativeImage.createFromPath(iconPath);
   win = new BrowserWindow({
     width: 480,
     height: 640,
+    icon: iconImage,
+
     frame: false,
     resizable: false,
     transparent: true,
@@ -33,7 +42,8 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      devTools: false,
     }
   })
 
@@ -43,6 +53,11 @@ const createWindow = () => {
       shell.openExternal(details.url); // Open URL in user's browser
     }
     return { action: 'deny' }; // Prevent the app from opening the URL internally
+  });
+
+  win.webContents.on('did-finish-load', () => {
+    win.show();
+    win.webContents.send('message', 'Hello renderer process!');
   });
 
 
@@ -118,6 +133,8 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit() // Basically end the task when all windows are closed if the platform is not macOS
 });
+
+
 
 
 

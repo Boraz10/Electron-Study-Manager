@@ -1,0 +1,86 @@
+name: Build and Release Electron App
+
+on:
+  push:
+    branches:
+      - main # or your default branch
+    tags:
+      - 'v*' # Trigger on version tags (e.g., v1.0.0)
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Use a relevant Node.js version
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Linux app
+        run: npm run make -- --platform=linux
+      # Optionally, upload the artifact
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: linux-build
+      #     path: out/make/**/*.deb
+      - name: Build and Publish app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatic token
+        run: npm run publish -- --platform=linux 
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Windows app
+        run: npm run make -- --platform=win32
+      # Optionally, upload the artifact
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: windows-build
+      #     path: out/make/**/*.exe
+      - name: Build and Publish app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatic token
+        run: npm run publish -- --platform=win32 
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build macOS app
+        run: npm run make -- --platform=darwin
+      # Optionally, upload the artifact
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: macos-build
+      #     path: out/make/**/*.dmg
+      - name: Build and Publish app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatic token
+        run: npm run publish -- --platform=darwin 
+      

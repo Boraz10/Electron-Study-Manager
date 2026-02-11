@@ -51,19 +51,23 @@ function updateBackground() {
     const now = new Date();
     const hour = now.getHours();
 
+    // Determine asset path based on current document location
+    const isInSubfolder = window.location.pathname.includes('/html/');
+    const assetPath = isInSubfolder ? '../Assets' : './Assets';
+
         let bgImage : string = "";
         let bgColor : string = "";
         if          (hour < 9 && hour >= 5) {
-            bgImage = "url('../Assets/bg_dawn.gif')";
+            bgImage = `url('${assetPath}/bg_dawn.gif')`;
             bgColor = "#FFDAB9";
         } else if   (hour < 16) {
-            bgImage = "url('../Assets/bg_day.gif')";
+            bgImage = `url('${assetPath}/bg_day.gif')`;
             bgColor = "#87CEEB";
         } else if   (hour < 21 || hour < 5) {
-            bgImage = "url('../Assets/bg_dusk.gif')";
+            bgImage = `url('${assetPath}/bg_dusk.gif')`;
             bgColor = "#FFA07A";
         }  else {
-            bgImage = "url('../Assets/bg_night.gif')";
+            bgImage = `url('${assetPath}/bg_night.gif')`;
             bgColor = "#2F4F4F";
         }
 
@@ -72,7 +76,9 @@ function updateBackground() {
 }
 
 export function playSound(sound: string) {
-    const audio = new Audio(`../Assets/Audio/${sound}.wav`);
+    const isInSubfolder = window.location.pathname.includes('/html/');
+    const assetPath = isInSubfolder ? '../Assets' : './Assets';
+    const audio = new Audio(`${assetPath}/Audio/${sound}.wav`);
     audio.play();
 }
 
