@@ -23,6 +23,8 @@ jobs:
           node-version: 24 # Use a relevant Node.js version
       - name: Install dependencies
         run: npm ci
+      - name: Compile TypeScript
+        run: npx tsc
       - name: Build Linux app
         run: npm run make -- --platform=linux
       # Optionally, upload the artifact
@@ -47,6 +49,8 @@ jobs:
           node-version: 24
       - name: Install dependencies
         run: npm ci
+      - name: Compile TypeScript
+        run: npx tsc
       - name: Build Windows app
         run: npm run make -- --platform=win32
       # Optionally, upload the artifact
@@ -71,6 +75,8 @@ jobs:
           node-version: 24
       - name: Install dependencies
         run: npm ci
+      - name: Compile TypeScript
+        run: npx tsc
       - name: Build macOS app
         run: npm run make -- --platform=darwin
       # Optionally, upload the artifact
